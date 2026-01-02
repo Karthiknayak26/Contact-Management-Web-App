@@ -54,45 +54,17 @@ This project intentionally uses **clean, minimal CSS** instead of fancy animatio
 
 The UI resembles an **internal business tool** - which is exactly what a contact management system should look like in a real company.
 
-## 🐛 Challenges Faced & Solutions
+## 🧠 Challenges & Learnings
 
-### 1. MongoDB Atlas Connection Issues
-**Problem**: Initial connection attempts failed with "option is not supported" errors.
+MongoDB Atlas Connection
+Resolved cloud connection issues by correctly configuring the Atlas URI using environment variables.
 
-**Root Cause**: MongoDB Atlas connection string contained query parameters (`?retryWrites=true&w=majority`) that are deprecated in newer Mongoose versions.
+CORS Configuration
+Adjusted backend CORS settings to allow communication between deployed frontend and backend.
 
-**Solution**: 
-- Cleaned connection string to: `mongodb+srv://user:password@cluster.mongodb.net/contact-manager`
-- Removed deprecated Mongoose options (`useNewUrlParser`, `useUnifiedTopology`)
-- Created diagnostic scripts to troubleshoot `.env` file formatting issues
+Real-time State Sync
+Prevented duplicate UI updates by handling REST and Socket.IO updates carefully.
 
-### 2. CORS Configuration
-**Problem**: Frontend couldn't connect to deployed backend due to CORS restrictions.
-
-**Root Cause**: Backend CORS was hardcoded to `localhost:5173`, blocking production frontend requests.
-
-**Solution**:
-```javascript
-// Updated to allow all origins for deployment flexibility
-app.use(cors({
-    origin: process.env.CORS_ORIGIN || '*',
-    credentials: true
-}));
-```
-
-### 3. Duplicate Contact Display
-**Problem**: Contacts appeared multiple times in the list after submission.
-
-**Root Cause**: Both form callback and Socket.IO event were adding the same contact to state without duplicate checking.
-
-**Solution**: Added duplicate detection in ContactList component:
-```javascript
-setContacts(prev => {
-    const exists = prev.some(contact => contact._id === newContact._id);
-    if (exists) return prev;
-    return [newContact, ...prev];
-});
-```
 
 ## 🚀 How to Run Locally
 
