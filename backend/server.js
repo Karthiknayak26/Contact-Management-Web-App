@@ -33,7 +33,7 @@ app.set('io', io);
 // MongoDB connection
 const connectDB = async () => {
     try {
-        await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/contact-manager');
+        await mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://user:12345@cluster0.q7dka.mongodb.net/contact-manager');
         console.log('✅ MongoDB connected successfully');
     } catch (error) {
         console.error('❌ MongoDB connection error:', error.message);
