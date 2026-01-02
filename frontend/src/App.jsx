@@ -3,7 +3,7 @@ import { io } from 'socket.io-client';
 import ContactForm from './components/ContactForm';
 import ContactList from './components/ContactList';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_URL = import.meta.env.VITE_API_URL || 'https://contact-management-web-app-mv7c.onrender.com';
 
 function App() {
     const [socket, setSocket] = useState(null);

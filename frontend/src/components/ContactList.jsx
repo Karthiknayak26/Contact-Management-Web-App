@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_URL = import.meta.env.VITE_API_URL || 'https://contact-management-web-app-mv7c.onrender.com';
 
 const ContactList = ({ newContact }) => {
     const [contacts, setContacts] = useState([]);
