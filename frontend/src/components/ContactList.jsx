@@ -15,7 +15,14 @@ const ContactList = ({ newContact }) => {
     // Add new contact when received via Socket.IO
     useEffect(() => {
         if (newContact) {
-            setContacts(prev => [newContact, ...prev]);
+            // Check if contact already exists to prevent duplicates
+            setContacts(prev => {
+                const exists = prev.some(contact => contact._id === newContact._id);
+                if (exists) {
+                    return prev; // Don't add if already exists
+                }
+                return [newContact, ...prev]; // Add to beginning of list
+            });
         }
     }, [newContact]);
 

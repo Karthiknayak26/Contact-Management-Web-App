@@ -41,10 +41,8 @@ const ContactForm = ({ onContactAdded }) => {
             newErrors.phone = 'Please enter a valid 10-digit phone number';
         }
 
-        // Message validation
-        if (!formData.message.trim()) {
-            newErrors.message = 'Message is required';
-        } else if (formData.message.trim().length < 10) {
+        // Message validation (optional)
+        if (formData.message.trim() && formData.message.trim().length < 10) {
             newErrors.message = 'Message must be at least 10 characters';
         }
 
@@ -197,7 +195,7 @@ const ContactForm = ({ onContactAdded }) => {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="message">Message *</label>
+                    <label htmlFor="message">Message (optional)</label>
                     <textarea
                         id="message"
                         name="message"
